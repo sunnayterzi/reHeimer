@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_photos" android:icon="@drawable/photo_vector" android:title="Photos"/>
+    <item
+        android:id="@+id/nav_reminder" android:icon="@drawable/calendervector" android:title="Reminder"/>
+    <item
+        android:id="@+id/nav_location" android:icon="@drawable/locationview" android:title="Location"/>
+    <item
+        android:id="@+id/nav_game" android:icon="@drawable/games" android:title="Games" />
+    <item
+        android:id="@+id/nav_profile" android:icon="@drawable/person_vector" android:title="Profile"/>
+
+</menu>

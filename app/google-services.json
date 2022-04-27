@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "211195822350",
+    "project_id": "reheimer",
+    "storage_bucket": "reheimer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211195822350:android:ca4f2139b7d8b784a9175f",
+        "android_client_info": {
+          "package_name": "com.example.reheimer2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211195822350-pj918d641e8hsvd41ai2hjm72es0nvsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj1jpvXaI9Zbee_8cOlVdXHid3wgL4YLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211195822350-pj918d641e8hsvd41ai2hjm72es0nvsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
