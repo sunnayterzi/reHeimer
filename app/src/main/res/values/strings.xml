@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Reheimer</string>
+    <string name="event_reminder">Event Reminder</string>
 </resources>
