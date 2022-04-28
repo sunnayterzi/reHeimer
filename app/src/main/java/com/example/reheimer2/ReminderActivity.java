@@ -10,17 +10,39 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ReminderActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    CalendarView calendarView;
-    TextView myDate;
+    private CalendarView calendarView;
+    private TextView myDate;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+
+        calendarView = (CalendarView) findViewById(R.id.calendarV);
+        myDate = (TextView) findViewById(R.id.savedDate);
+
+
+        // Method to save the selected date in the calendar
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                String date =  i2+ "/" + (i1 + 1) + "/" + i;
+                myDate.setText(date);
+            }
+        });
 
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_reminder);
