@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.CalendarView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ReminderActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    CalendarView calendarView;
+    TextView myDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
