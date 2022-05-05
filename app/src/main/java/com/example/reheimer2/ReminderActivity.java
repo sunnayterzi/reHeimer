@@ -6,25 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class ReminderActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     private CalendarView calendarView;
-    private TextView myDate;
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +23,15 @@ public class ReminderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reminder);
 
         calendarView = (CalendarView) findViewById(R.id.calendarV);
-        myDate = (TextView) findViewById(R.id.savedDate);
+        Button addEventBtn = (Button) findViewById(R.id.calendar_button);
 
-
-        // Method to save the selected date in the calendar
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String date =  i2+ "/" + (i1 + 1) + "/" + i;
-                myDate.setText(date);
+            public void onClick(View view) {
+                startActivity(new Intent(ReminderActivity.this,AddEventActivity.class));
             }
         });
+
 
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_reminder);

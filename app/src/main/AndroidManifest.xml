@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Reheimer2">
         <activity
+            android:name=".AddEventActivity"
+            android:exported="false" />
+        <activity
             android:name=".GamesActivity"
             android:exported="false" />
         <activity

@@ -3,5 +3,6 @@
     <string name="event_reminder">Event Reminder</string>
     <string name="save_the_date">Save The Date</string>
     <string name="pick_a_date">Pick a date</string>
-    <string name="select_a_date">Select a Date </string>
+    <string name="add_an_event">Add an Event</string>
+    <string name="button">Button</string>
 </resources>
