@@ -2,21 +2,74 @@ package com.example.reheimer2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class PhotosActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    private RecyclerView recyclerView;
+    private ArrayList<Photo>list;
+    private PhotoAdapter adapter;
+    private DatabaseReference mReference;
+    private FirebaseDatabase database;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
+
+        recyclerView = findViewById(R.id.recyclerView_photos);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        database = FirebaseDatabase.getInstance();
+
+        mAuth= FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        mReference = database.getReference("Photos").child(mAuth.getCurrentUser().getUid());
+
+
+
+        list = new ArrayList<>();
+        adapter = new PhotoAdapter(this, list);
+        recyclerView.setAdapter(adapter);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Photo photo = dataSnapshot.getValue(Photo.class);
+                    list.add(photo);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_photos);
@@ -52,5 +105,13 @@ public class PhotosActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+
+
+    public void navigateAddPhoto(View view) {
+
+        Intent intent = new Intent(this, UploadPhotoActivity.class);
+        startActivity(intent);
     }
 }
