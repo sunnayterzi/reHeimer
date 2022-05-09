@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/album"
+    tools:context=".MemorizeNumbers">
+
+    <TextView
+        android:id="@+id/textView_pointNumbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Point: 10"
+        android:textColor="@color/purple_700"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextText_typeNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/input_bg"
+        android:digits="1234567890"
+        android:ems="10"
+        android:hint="Enter the Number"
+        android:inputType="numberSigned"
+        android:minHeight="48dp"
+        android:paddingLeft="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pointNumbers" />
+
+    <TextView
+        android:id="@+id/textView_numbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView_pointNumbers"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="@+id/textView_pointNumbers"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pointNumbers" />
+
+    <Button
+        android:id="@+id/button_numberCheck"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_bg"
+        android:text="Check"
+        app:layout_constraintEnd_toEndOf="@+id/editTextText_typeNumber"
+        app:layout_constraintStart_toStartOf="@+id/editTextText_typeNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText_typeNumber" />
+</androidx.constraintlayout.widget.ConstraintLayout>

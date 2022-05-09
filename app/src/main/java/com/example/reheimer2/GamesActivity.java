@@ -6,16 +6,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class GamesActivity extends AppCompatActivity {
+public class GamesActivity extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomNavigationView;
+    private TextView memorizeNumberText, cardMatchingText;
+    private ImageView memorizeNumberImage, cardMatchingImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
+
+        memorizeNumberImage = (ImageView)findViewById(R.id.imageView_memorizeNumbers);
+        memorizeNumberImage.setOnClickListener(this);
+
+        cardMatchingImage = (ImageView)findViewById(R.id.imageView_cardMatching);
+        cardMatchingImage.setOnClickListener(this);
+
+        memorizeNumberText = (TextView) findViewById(R.id.textView_memorizeNumbers);
+        memorizeNumberText.setOnClickListener(this);
+
+        cardMatchingText = (TextView) findViewById(R.id.textView_cardMatching);
+        cardMatchingText.setOnClickListener(this);
 
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_game);
@@ -52,4 +69,21 @@ public class GamesActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.imageView_memorizeNumbers:
+            case R.id.textView_memorizeNumbers:
+                startActivity(new Intent(this,MemorizeNumbers.class));
+                break;
+            case R.id.imageView_cardMatching:
+            case R.id.textView_cardMatching:
+                startActivity(new Intent(this,CardMatchingActivity.class));
+                break;
+        }
+
+    }
+
+
 }
