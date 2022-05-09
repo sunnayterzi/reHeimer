@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,17 +56,22 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        Intent toReminderActivity = new Intent(this,ReminderActivity.class);
+        mDBRef = mDatabase.getReference("Events");
 
-        //TODO add cancel button for this activity
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 SingleEvent singleEvent = new SingleEvent(selectedDate,eventContext.getText().toString(),selectedTime);
-                mDBRef = FirebaseDatabase.getInstance().getReference("Events");
-                DatabaseReference eventChild = mDBRef.child(currentUser.getUid().toString());
-                eventChild.child("eventList").setValue(singleEvent);
-                startActivity(new Intent(AddEventActivity.this,ReminderActivity.class));
+
+                String id = mDBRef.push().getKey();
+
+                mDBRef.child(currentUser.getUid()).child(id).setValue(singleEvent);
+
+                startActivity(toReminderActivity);
             }
         });
     }
