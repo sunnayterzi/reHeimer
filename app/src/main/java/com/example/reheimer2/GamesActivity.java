@@ -14,8 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GamesActivity extends AppCompatActivity implements View.OnClickListener {
     BottomNavigationView bottomNavigationView;
-    private TextView memorizeNumberText, cardMatchingText;
-    private ImageView memorizeNumberImage, cardMatchingImage;
+    private TextView memorizeNumberText, cardMatchingText, verbalMemoryText;
+    private ImageView memorizeNumberImage, cardMatchingImage, verbalMemoryImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,17 @@ public class GamesActivity extends AppCompatActivity implements View.OnClickList
         cardMatchingImage = (ImageView)findViewById(R.id.imageView_cardMatching);
         cardMatchingImage.setOnClickListener(this);
 
+        verbalMemoryImage = (ImageView)findViewById(R.id.imageView_verbalMemory);
+        verbalMemoryImage.setOnClickListener(this);
+
         memorizeNumberText = (TextView) findViewById(R.id.textView_memorizeNumbers);
         memorizeNumberText.setOnClickListener(this);
 
         cardMatchingText = (TextView) findViewById(R.id.textView_cardMatching);
         cardMatchingText.setOnClickListener(this);
+
+        verbalMemoryText = (TextView) findViewById(R.id.textView_verbalMemory);
+        verbalMemoryText.setOnClickListener(this);
 
         // bottom navigation bar controls
         bottomNavigationView=findViewById(R.id.bottom_navigator);
@@ -71,7 +77,7 @@ public class GamesActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    // navigate user accarding to his/her game choice
+    // navigate user according to his/her game choice
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -82,6 +88,10 @@ public class GamesActivity extends AppCompatActivity implements View.OnClickList
             case R.id.imageView_cardMatching:
             case R.id.textView_cardMatching:
                 startActivity(new Intent(this,CardMatchingMenuActivity.class));
+                break;
+            case R.id.imageView_verbalMemory:
+            case R.id.textView_verbalMemory:
+                startActivity(new Intent(this,VerbalMemoryActivity.class));
                 break;
         }
 
