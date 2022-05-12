@@ -64,4 +64,15 @@
         app:layout_constraintStart_toStartOf="@+id/button_16cards"
         app:layout_constraintTop_toBottomOf="@+id/button_16cards" />
 
+    <Button
+        android:id="@+id/button_backMenu1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:onClick="backMenu"
+        android:text="Back to game menu"
+        app:layout_constraintEnd_toEndOf="@+id/button_20cards"
+        app:layout_constraintStart_toStartOf="@+id/button_20cards"
+        app:layout_constraintTop_toBottomOf="@+id/button_20cards" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

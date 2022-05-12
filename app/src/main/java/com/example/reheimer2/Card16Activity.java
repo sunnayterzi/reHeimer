@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class Card16Activity extends AppCompatActivity implements View.OnClickLis
     Timer timer;
     TimerTask timerTask;
     Double time = 0.0;
+    Button exit16;
 
 
     @Override
@@ -38,6 +40,7 @@ public class Card16Activity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card16);
 
+        exit16 = (Button)findViewById(R.id.button_exit16);
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout_4x4);
         int numColumns = gridLayout.getColumnCount();
         int numRows = gridLayout.getRowCount();
@@ -221,4 +224,10 @@ public class Card16Activity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
+
+    public void exitSixteen(View view) {
+        Intent mintent = new Intent(this, CardMatchingMenuActivity.class);
+        startActivity(mintent);
+    }
 }

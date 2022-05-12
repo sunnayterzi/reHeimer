@@ -12,6 +12,7 @@ public class CardMatchingMenuActivity extends AppCompatActivity {
     private Button button12;
     private Button button16;
     private Button button20;
+    private Button buttonback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class CardMatchingMenuActivity extends AppCompatActivity {
         button12 = findViewById(R.id.button_12cards);
         button16 = findViewById(R.id.button_16cards);
         button20 = findViewById(R.id.button_20cards);
+        buttonback = findViewById(R.id.button_backMenu1);
     }
     // navigate user according to choice
     public void navigate4x3(View view) {
@@ -35,5 +37,10 @@ public class CardMatchingMenuActivity extends AppCompatActivity {
     public void navigate20cards(View view) {
         Intent navigate20 = new Intent(this, Card20Activity.class);
         startActivity(navigate20);
+    }
+
+    public void backMenu(View view) {
+        Intent mintent = new Intent(this, GamesActivity.class);
+        startActivity(mintent);
     }
 }

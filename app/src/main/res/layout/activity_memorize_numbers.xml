@@ -29,7 +29,7 @@
         android:background="@drawable/input_bg"
         android:digits="1234567890"
         android:ems="10"
-        android:hint="Enter the Number"
+        android:hint="What was the number?"
         android:inputType="numberSigned"
         android:minHeight="48dp"
         android:paddingLeft="15dp"
@@ -72,7 +72,6 @@
         android:onClick="exitGame"
         android:text="Exit game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

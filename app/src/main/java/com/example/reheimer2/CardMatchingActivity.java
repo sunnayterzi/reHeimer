@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -34,12 +35,13 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
     TimerTask timerTask;
     Double time = 0.0;
     private boolean timerStarted = false;
+    Button tButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_matching);
-
+        tButton = (Button) findViewById(R.id.button_exittwelve);
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout_4x3);
         int numColumns = gridLayout.getColumnCount();
         int numRows = gridLayout.getRowCount();
@@ -219,5 +221,10 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
             },500);
         }
 
+    }
+
+    public void exitTwelve(View view) {
+        Intent tintent = new Intent(this, CardMatchingMenuActivity.class);
+        startActivity(tintent);
     }
 }

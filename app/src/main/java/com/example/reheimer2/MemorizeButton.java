@@ -27,6 +27,7 @@ public class MemorizeButton extends androidx.appcompat.widget.AppCompatButton {
         back = context.getDrawable(R.drawable.card_back3);
         setBackground(back);
         GridLayout.LayoutParams tempParams = new GridLayout.LayoutParams(GridLayout.spec(r),GridLayout.spec(c));
+        //87 for phone 130 for emulator
         tempParams.width = (int) getResources().getDisplayMetrics().density*130;
         tempParams.height = (int) getResources().getDisplayMetrics().density*130;
         setLayoutParams(tempParams);
