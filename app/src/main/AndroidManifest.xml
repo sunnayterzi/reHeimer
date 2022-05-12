@@ -34,6 +34,15 @@
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
+            android:name=".Card20Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Card16Activity"
+            android:exported="false" />
+        <activity
+            android:name=".CardMatchingMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".CardMatchingActivity"
             android:exported="false" />
         <activity

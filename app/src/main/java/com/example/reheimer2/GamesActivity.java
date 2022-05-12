@@ -34,6 +34,7 @@ public class GamesActivity extends AppCompatActivity implements View.OnClickList
         cardMatchingText = (TextView) findViewById(R.id.textView_cardMatching);
         cardMatchingText.setOnClickListener(this);
 
+        // bottom navigation bar controls
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_game);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,6 +71,7 @@ public class GamesActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    // navigate user accarding to his/her game choice
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -79,7 +81,7 @@ public class GamesActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.imageView_cardMatching:
             case R.id.textView_cardMatching:
-                startActivity(new Intent(this,CardMatchingActivity.class));
+                startActivity(new Intent(this,CardMatchingMenuActivity.class));
                 break;
         }
 

@@ -49,12 +49,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
+
+        // to prevent the user from constantly logging in unless logged out
         if(mAuth.getCurrentUser()!=null){
             Intent mainIntent=new Intent(this,MainActivity.class);
             startActivity(mainIntent);
         }
     }
 
+    // navigate user to intents
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -71,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    // login controls if information are mismatch show toast message
     private void userLogin() {
         String email=loginEmail.getText().toString().trim();
         String password=loginPassword.getText().toString().trim();

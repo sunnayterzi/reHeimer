@@ -50,14 +50,13 @@ public class UploadPhotoActivity extends AppCompatActivity {
         progressBar=(ProgressBar) findViewById(R.id.progressBar_uploadImage);
         progressBar.setVisibility(View.INVISIBLE);
         description=(EditText) findViewById(R.id.editText_descriptionPhoto);
-
         database = FirebaseDatabase.getInstance();
         mReference = database.getReference("Photos");
         storageReference= FirebaseStorage.getInstance().getReference();
         mAuth= FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-
+        // get a photo from gallery
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +66,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                 startActivityForResult(galleryIntent,2);
             }
         });
+
 
         uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +95,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
         }
     }
 
+    // upload photos to database
     private void uploadFirebase(Uri uri){
         Intent AlbumIntent = new Intent(this, PhotosActivity.class);
 

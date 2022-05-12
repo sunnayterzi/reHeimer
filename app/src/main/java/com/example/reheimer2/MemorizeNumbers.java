@@ -20,10 +20,10 @@ public class MemorizeNumbers extends AppCompatActivity {
     private Button check;
     Random random;
     int clickCounter = 0;
-
     int currentPoint = 0;
     int level = 1;
     String showedNumber;
+    Button exitGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +37,14 @@ public class MemorizeNumbers extends AppCompatActivity {
         typeNumber = (EditText) findViewById(R.id.editTextText_typeNumber);
         point.setText("Point: " +currentPoint);
         showedNumber=generateNumbers(level);
-
+        exitGame = (Button) findViewById(R.id.button_exitmain);
         number.setText(showedNumber);
         check = (Button) findViewById(R.id.button_numberCheck);
-
         typeNumber.setVisibility(View.GONE);
         check.setVisibility(View.GONE);
         number.setVisibility(View.VISIBLE);
 
+        // show number to user 2 sec
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -58,13 +58,11 @@ public class MemorizeNumbers extends AppCompatActivity {
         }, 2000);
 
 
-
+        // compare user input with number if they are match increase point else show dialog box
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String [ ] splitted = point.getText().toString().split(" ");
-
-
                 if(showedNumber.equals(typeNumber.getText().toString())) {
                     currentPoint = Integer.parseInt(splitted[1]) + level*10;
                     typeNumber.setText("");
@@ -113,6 +111,7 @@ public class MemorizeNumbers extends AppCompatActivity {
         });
     }
 
+    // generate random numbers with increasing digits
     private String generateNumbers(int digits){
         String output = "";
         for (int i=0; i<digits; i++) {
@@ -123,6 +122,7 @@ public class MemorizeNumbers extends AppCompatActivity {
         return output;
     }
 
+    // set dialog box elements
     public void showDialog(String showedNumber, int currentPoint){
         Intent gameIntent = new Intent(this, GamesActivity.class);
         final AlertDialog.Builder alert = new AlertDialog.Builder(MemorizeNumbers.this);
@@ -161,5 +161,12 @@ public class MemorizeNumbers extends AppCompatActivity {
             }
         });
         alertDialog.show();
+    }
+
+    // when clicked exit button, navigate game intent
+    public void exitGame(View view) {
+
+        Intent exitIntent = new Intent(this, GamesActivity.class);
+        startActivity(exitIntent);
     }
 }
