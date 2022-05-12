@@ -1,8 +1,17 @@
 package com.example.reheimer2;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -24,9 +33,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     BottomNavigationView bottomNavigationView;
-    FusedLocationProviderClient client;
+    //FusedLocationProviderClient client;
     SupportMapFragment mapFragment;
+    private Boolean oke = false;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +49,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        client = LocationServices.getFusedLocationProviderClient(this);
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},100);
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500,
+                0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(@NonNull Location location) {
+                        if(oke){
+                            LatLng lct = new LatLng(location.getLatitude(), location.getLongitude());
+                            mMap.addMarker(new MarkerOptions().position(lct).title("Your location"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(lct));
+
+                        }
+                    }
+                });
 
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_location);
@@ -85,13 +115,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        oke = true;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},100);
+        }
+
+        // Add a marker in Turkey and move the camera
+        LatLng turkey = new LatLng(41, 28);
+        mMap.addMarker(new MarkerOptions().position(turkey).title("Marker in Turkey"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(turkey));
+        mMap.setMyLocationEnabled(true);
     }
 }
