@@ -57,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},100);
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500,
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 600000,
                 0, new LocationListener() {
                     @Override
                     public void onLocationChanged(@NonNull Location location) {
