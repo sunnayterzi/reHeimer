@@ -40,19 +40,15 @@ public class PhotosActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_photos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         database = FirebaseDatabase.getInstance();
-
         mAuth= FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         mReference = database.getReference("Photos").child(mAuth.getCurrentUser().getUid());
-
-
-
         list = new ArrayList<>();
         adapter = new PhotoAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
+        // take photos to show users
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -107,8 +103,7 @@ public class PhotosActivity extends AppCompatActivity {
         });
     }
 
-
-
+    // navigate user for adding photos
     public void navigateAddPhoto(View view) {
 
         Intent intent = new Intent(this, UploadPhotoActivity.class);

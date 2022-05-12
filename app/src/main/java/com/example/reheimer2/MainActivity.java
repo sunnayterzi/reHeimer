@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         database=FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
+        // navigate user to activities
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         update=(Button) findViewById(R.id.ProfileUpdate_button);
-
         logout=(Button) findViewById(R.id.button_logout);
+
+        // logout click listener
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    // get user information
     @Override
     protected void onStart() {
         super.onStart();
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    // update user information
     public void update(View view) {
         reference.child(mAuth.getCurrentUser().getUid()).child("address").setValue(addressEdit.getText().toString());
         user.address = addressEdit.getText().toString();

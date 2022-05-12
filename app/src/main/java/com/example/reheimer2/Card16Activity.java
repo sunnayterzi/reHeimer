@@ -2,7 +2,6 @@ package com.example.reheimer2;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +16,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CardMatchingActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class Card16Activity extends AppCompatActivity implements View.OnClickListener {
 
     private int numberOfElements;
     private MemorizeButton [] buttons;
@@ -30,36 +27,40 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
     int count = 0;
     private TextView timerText;
     private boolean isBusy = false;
+    private boolean timerStarted = false;
     Timer timer;
     TimerTask timerTask;
     Double time = 0.0;
-    private boolean timerStarted = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_matching);
+        setContentView(R.layout.activity_card16);
 
-        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout_4x3);
+        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout_4x4);
         int numColumns = gridLayout.getColumnCount();
         int numRows = gridLayout.getRowCount();
         numberOfElements = numColumns*numRows;
         buttons = new MemorizeButton[numberOfElements];
         buttonGraphics = new int[numberOfElements/2];
 
-        buttonGraphics[0] = R.drawable.ahtapot;
-        buttonGraphics[1] = R.drawable.balik;
-        buttonGraphics[2] = R.drawable.bocek;
-        buttonGraphics[3] = R.drawable.ordek;
-        buttonGraphics[4] = R.drawable.penguen;
-        buttonGraphics[5] = R.drawable.sincap;
+        buttonGraphics[0] = R.drawable.ari;
+        buttonGraphics[1] = R.drawable.aslan;
+        buttonGraphics[2] = R.drawable.fil;
+        buttonGraphics[3] = R.drawable.frog;
+        buttonGraphics[4] = R.drawable.hipopotam;
+        buttonGraphics[5] = R.drawable.monkey;
+        buttonGraphics[6] = R.drawable.panda;
+        buttonGraphics[7] = R.drawable.tiger;
 
-        //// Adding timer to set game time
-        timerText = (TextView) findViewById(R.id.Text_cardMatchingTimer);
+        // Adding timer to set game time
+        timerText = (TextView) findViewById(R.id.Text_cardMatchingTimer16);
         timer = new Timer();
         timerTask = new TimerTask() {
             @Override
             public void run() {
+
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -89,7 +90,6 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
                 gridLayout.addView(tempButton);
             }
         }
-
     }
 
     // calculating hours, minutes and seconds
@@ -156,38 +156,38 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
             button.flip();
             button.setMatched(true);
             selectedButton1.setMatched(true);
-
             selectedButton1.setEnabled(false);
             button.setEnabled(false);
             count++;
-
-
             selectedButton1 =null;
-            if (count==6){
+
+            if (count==8){
 
                 timerText.setVisibility(View.INVISIBLE);
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CardMatchingActivity.this);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Card16Activity.this);
                 alertDialogBuilder.setMessage("GAME OVER \n \n You completed it in " + timerText.getText().toString() + " time")
 
-                .setCancelable(false)
-                .setPositiveButton("New", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(getApplicationContext(), CardMatchingActivity.class);
-                        startActivity(intent);
-                        finish();
+                        .setCancelable(false)
+                        .setPositiveButton("New", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(getApplicationContext(), Card16Activity.class);
+                                startActivity(intent);
+                                finish();
 
-                    }
-                })
-                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        startActivity(gameIntent);
-                        finish();
+                            }
+                        })
+                        .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(gameIntent);
+                                finish();
 
-                    }
-                });
+
+
+                            }
+                        });
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
@@ -198,7 +198,7 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
 
         }
 
-        //If there is no match, the cards are returned after half a second.
+       //If there is no match, the cards are returned after half a second.
         else{
             selectedButton2 = button;
             selectedButton2.flip();
@@ -220,4 +220,5 @@ public class CardMatchingActivity extends AppCompatActivity implements View.OnCl
         }
 
     }
+
 }

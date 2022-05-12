@@ -43,6 +43,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     }
 
+    // If the user forgets her/his password, send a message to her email to change her/his password
+    // Email pattern checked. Sen user toast message
+
     private void resetPassword(){
         String email=emailText.getText().toString().trim();
 

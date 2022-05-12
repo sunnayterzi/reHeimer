@@ -34,6 +34,7 @@ public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.PhotoViewHo
         return new PhotoViewHolder(v);
     }
 
+    // set imageView and imageDescription according to user's database information
     @Override
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
         Photo photo = pList.get(position);
@@ -43,6 +44,7 @@ public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.PhotoViewHo
 
     }
 
+    // assign elements to imageview and textview variables via ids.
     @Override
     public int getItemCount() {
         return pList.size();

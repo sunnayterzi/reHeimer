@@ -64,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    // take user's register information
     private void registerUser() {
         String email= emailRegister.getText().toString().trim();
         String name= nameRegister.getText().toString().trim();
