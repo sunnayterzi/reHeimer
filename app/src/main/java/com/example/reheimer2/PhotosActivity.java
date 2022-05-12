@@ -88,7 +88,7 @@ public class PhotosActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_location:
-                        startActivity(new Intent(getApplicationContext(),LocationActivity.class));
+                        startActivity(new Intent(getApplicationContext(),MapsActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

@@ -1,9 +1,11 @@
 package com.example.reheimer2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +13,16 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 public class AddEventActivity extends AppCompatActivity {
@@ -30,7 +35,9 @@ public class AddEventActivity extends AppCompatActivity {
     private TimePicker picker;
     private Button addEventBtn;
     private TextView eventContext;
+    private Button cancelEventBtn;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,7 @@ public class AddEventActivity extends AppCompatActivity {
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         addEventBtn = (Button) findViewById(R.id.addEventBtn);
         eventContext = (TextView) findViewById(R.id.eventNameInput);
+        cancelEventBtn = (Button) findViewById(R.id.cancelEventBtn);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -61,6 +69,7 @@ public class AddEventActivity extends AppCompatActivity {
         Intent toReminderActivity = new Intent(this,ReminderActivity.class);
         mDBRef = mDatabase.getReference("Events");
 
+
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,5 +83,30 @@ public class AddEventActivity extends AppCompatActivity {
                 startActivity(toReminderActivity);
             }
         });
+
+        cancelEventBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(toReminderActivity);
+            }
+        });
     }
+
+
 }
+/*
+*
+*
+*  String dateC = "19/05/2022";
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date1 = LocalDate.parse(dateC, formatter1);
+
+        LocalTime dateT = LocalTime.of(17, 40);
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+        formatter2.format(dateT);
+
+        Log.d("converting 1",date1.toString());
+        Log.d("converting 2",formatter2.format(dateT));
+*
+*
+* */

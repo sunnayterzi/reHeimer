@@ -5,4 +5,8 @@
     <string name="pick_a_date">Pick a date</string>
     <string name="add_an_event">Add an Event</string>
     <string name="button">Button</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="event_name">Event Name</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

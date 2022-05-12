@@ -23,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+//TODO notification?
+
 public class ReminderActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -92,7 +94,7 @@ public class ReminderActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_location:
-                        startActivity(new Intent(getApplicationContext(),LocationActivity.class));
+                        startActivity(new Intent(getApplicationContext(),MapsActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

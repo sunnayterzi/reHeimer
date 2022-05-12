@@ -14,14 +14,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="match_parent"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/eventContext"
             android:layout_width="114dp"
             android:layout_height="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
             android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/eventDate"
             app:layout_constraintHorizontal_bias="0.32"
@@ -32,7 +32,6 @@
             android:id="@+id/eventTime"
             android:layout_width="114dp"
             android:layout_height="18dp"
-            android:layout_marginTop="16dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,8 +40,7 @@
             android:id="@+id/eventDate"
             android:layout_width="114dp"
             android:layout_height="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
             android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/eventTime"
             app:layout_constraintTop_toTopOf="parent" />
