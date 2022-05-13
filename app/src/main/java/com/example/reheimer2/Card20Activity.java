@@ -123,7 +123,7 @@ public class Card20Activity extends AppCompatActivity implements View.OnClickLis
 
         for (int j = 0; j < numberOfElements; j++){
             int temp = buttonGraphicLocations[j];
-            int swapLocation = random.nextInt(12);
+            int swapLocation = random.nextInt(20);
             buttonGraphicLocations[j] = buttonGraphicLocations[swapLocation];
             buttonGraphicLocations[swapLocation] = temp;
         }
