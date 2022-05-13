@@ -14,9 +14,10 @@
     <string name="new_">new</string>
     <string name="points_text">Points: %1$d</string>
     <string name="lives_text">Lives: %1$d</string>
-    <string name="game_over_text">Game Over! You earned %1$d points!</string>
+    <string name="game_over_text">You earned %1$d points!</string>
     <string name="cancel_verbal">cancel</string>
     <string name="game_info">Verbal Memory Game</string>
     <string name="game_info_context">There will be words on the screen, one at a time. If you have seen the word click seen,
      if it is a new word click new.</string>
+    <string name="game_over">GAME OVER</string>
 </resources>

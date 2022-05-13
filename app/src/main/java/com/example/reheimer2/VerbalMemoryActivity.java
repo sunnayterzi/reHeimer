@@ -1,11 +1,15 @@
 package com.example.reheimer2;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -21,7 +25,6 @@ public class VerbalMemoryActivity extends AppCompatActivity {
     TextView showWord;
     TextView pointsText;
     TextView livesText;
-    TextView gameOver;
     Button cancelButton;
     TextView gameInfo;
     TextView gameInfoContext;
@@ -39,7 +42,6 @@ public class VerbalMemoryActivity extends AppCompatActivity {
         showWord = (TextView) findViewById(R.id.showWord);
         pointsText = (TextView) findViewById(R.id.pointsText);
         livesText = (TextView) findViewById(R.id.livesText);
-        gameOver = (TextView) findViewById(R.id.gameOverText);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         gameInfo = (TextView) findViewById(R.id.gameInfoText);
         gameInfoContext = (TextView) findViewById(R.id.gameInfoContext);
@@ -53,7 +55,6 @@ public class VerbalMemoryActivity extends AppCompatActivity {
         showWord.setVisibility(View.INVISIBLE);
         pointsText.setVisibility(View.INVISIBLE);
         livesText.setVisibility(View.INVISIBLE);
-        gameOver.setVisibility(View.INVISIBLE);
         cancelButton.setVisibility(View.INVISIBLE);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,6 @@ public class VerbalMemoryActivity extends AppCompatActivity {
                 pointsText.setVisibility(View.VISIBLE);
                 livesText.setVisibility(View.VISIBLE);
                 cancelButton.setVisibility(View.VISIBLE);
-                gameOver.setVisibility(View.INVISIBLE);
                 gameInfo.setVisibility(View.INVISIBLE);
                 gameInfoContext.setVisibility(View.INVISIBLE);
 
@@ -107,9 +107,7 @@ public class VerbalMemoryActivity extends AppCompatActivity {
                     pointsText.setVisibility(View.INVISIBLE);
                     livesText.setVisibility(View.INVISIBLE);
                     cancelButton.setVisibility(View.INVISIBLE);
-                    btn.setVisibility(View.VISIBLE);
-                    gameOver.setText(getString(R.string.game_over_text,point));
-                    gameOver.setVisibility(View.VISIBLE);
+                    gameOverDialog(point);
                 }
                 seenArray.add(a);
                 String s = wordArray[(int)(Math.random() * wordArray.length)];
@@ -146,9 +144,7 @@ public class VerbalMemoryActivity extends AppCompatActivity {
                     pointsText.setVisibility(View.INVISIBLE);
                     livesText.setVisibility(View.INVISIBLE);
                     cancelButton.setVisibility(View.INVISIBLE);
-                    btn.setVisibility(View.VISIBLE);
-                    gameOver.setText(getString(R.string.game_over_text,point));
-                    gameOver.setVisibility(View.VISIBLE);
+                    gameOverDialog(point);
                 }
                 String s = wordArray[(int)(Math.random() * wordArray.length)];
                 showWord.setText(s);
@@ -172,5 +168,43 @@ public class VerbalMemoryActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void gameOverDialog(int point){
+        final AlertDialog.Builder gameOverAlert = new AlertDialog.Builder(VerbalMemoryActivity.this);
+        View gameOverView = getLayoutInflater().inflate(R.layout.verbal_game_over, null);
+        Intent returnGamesIntent = new Intent(this, GamesActivity.class);
+
+        final TextView gameOverText = (TextView) gameOverView.findViewById(R.id.textView7);
+
+        Button exit = (Button) gameOverView.findViewById(R.id.verbalExitButton);
+        Button retry = (Button) gameOverView.findViewById(R.id.verbalRetryBtn);
+        gameOverAlert.setView(gameOverView);
+
+        final AlertDialog alertDialog = gameOverAlert.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        gameOverText.setText(getString(R.string.game_over_text,point));
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(returnGamesIntent);
+                alertDialog.dismiss();
+
+            }
+        });
+
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent thisIntent = getIntent();
+                finish();
+                startActivity(thisIntent);
+                alertDialog.dismiss();
+
+            }
+        });
+        alertDialog.show();
     }
 }
