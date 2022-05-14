@@ -44,5 +44,13 @@
         <item>pass</item>
         <item>door</item>
         <item>table</item>
+        <item>talk</item>
+        <item>dude</item>
+        <item>screen</item>
+        <item>detector</item>
+        <item>test</item>
+        <item>fair</item>
+        <item>water</item>
+        <item>fire</item>
     </string-array>
 </resources>
