@@ -17,6 +17,10 @@ import java.util.ArrayList;
 
 public class VerbalMemoryActivity extends AppCompatActivity {
 
+    /*
+    * This activity is a game where you try to decide if you have seen the word on the screen
+    * or not. */
+
     private String[] wordArray;
     private ArrayList<String> seenArray;
     private int point;

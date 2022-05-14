@@ -25,9 +25,10 @@ import java.util.ArrayList;
 
 
 public class ReminderActivity extends AppCompatActivity {
+    /*
+    * This activity shows current events that user has entered.*/
 
     /* To list certain user's events, firebase needed. */
-
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDBRef;

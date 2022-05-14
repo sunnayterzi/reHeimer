@@ -52,5 +52,15 @@
         <item>fair</item>
         <item>water</item>
         <item>fire</item>
+        <item>beautiful</item>
+        <item>item</item>
+        <item>empty</item>
+        <item>tag</item>
+        <item>rock</item>
+        <item>normal</item>
+        <item>coffee</item>
+        <item>quick</item>
+        <item>editor</item>
+        <item>problem</item>
     </string-array>
 </resources>
