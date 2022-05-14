@@ -15,27 +15,27 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.reheimer2.databinding.ActivityMapsBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-//implements OnMapReadyCallback
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
+
+    /* Google Maps activity. Also shows user location using latitude and longitude  */
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-    BottomNavigationView bottomNavigationView;
-    //FusedLocationProviderClient client;
     SupportMapFragment mapFragment;
     private Boolean oke = false;
+    BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -50,14 +50,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        /* In order to access user's location, we need to ask for permission. If those permissions
+        *  are granted then we can access latitude and longitude of the user. */
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
+                    /* For close location we need to ask for ACCESS_FINE_LOCATION. But we can not
+                    *  access ACCESS_FINE_LOCATION without also asking for ACCESS_COARSE_LOCATION
+                    *  permission */
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},100);
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 600000,
+        /* When location changes, to keep up with it we can use onLocationChanged method.
+        *  Gets the new location and adds the marker. */
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000,
                 0, new LocationListener() {
                     @Override
                     public void onLocationChanged(@NonNull Location location) {
@@ -69,6 +76,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                 });
+
+
+        /*        Bottom Navigation         */
 
         bottomNavigationView=findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.nav_location);

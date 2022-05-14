@@ -1,6 +1,10 @@
 package com.example.reheimer2;
 
 public class SingleEvent {
+    /* Java class to construct the event object.
+    * Takes date, context and hour of the event
+    * and creates an object. */
+
     String date, eventContext,hour;
 
     public SingleEvent(){

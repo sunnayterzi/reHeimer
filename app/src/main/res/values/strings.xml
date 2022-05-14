@@ -20,4 +20,29 @@
     <string name="game_info_context">There will be words on the screen, one at a time. If you have seen the word click seen,
      if it is a new word click new.</string>
     <string name="game_over">GAME OVER</string>
+
+    <string-array name="word_list">
+        <item>word</item>
+        <item>damn</item>
+        <item>hey</item>
+        <item>hello</item>
+        <item>place</item>
+        <item>holder</item>
+        <item>cat</item>
+        <item>dog</item>
+        <item>animal</item>
+        <item>sky</item>
+        <item>wow</item>
+        <item>yes</item>
+        <item>hair</item>
+        <item>answer</item>
+        <item>lazy</item>
+        <item>home</item>
+        <item>weapon</item>
+        <item>term</item>
+        <item>power</item>
+        <item>pass</item>
+        <item>door</item>
+        <item>table</item>
+    </string-array>
 </resources>

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -19,13 +18,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 
 public class AddEventActivity extends AppCompatActivity {
+    /*
+    * AddEventActivity takes date, hour and event name, creates a single event object and
+    * adds that object to firebase database under the current user's id
+    */
+
     private CalendarView calendarView;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
@@ -43,13 +42,20 @@ public class AddEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
+        /* Widget to pick hour and minute*/
         picker=(TimePicker)findViewById(R.id.datePicker1);
         picker.setIs24HourView(true);
+
+        /* Calendar view to pick date from a calendar*/
         calendarView = (CalendarView) findViewById(R.id.calendarView);
-        addEventBtn = (Button) findViewById(R.id.addEventBtn);
+
         eventContext = (TextView) findViewById(R.id.eventNameInput);
+
+        /* Buttons to create an event or cancel the process*/
+        addEventBtn = (Button) findViewById(R.id.addEventBtn);
         cancelEventBtn = (Button) findViewById(R.id.cancelEventBtn);
 
+        /* When there is change on the calendar view, selected date saved to selectedDate */
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -57,6 +63,7 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
+        /* When there is change on the time widget, selected time saved to selectedTime */
         picker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker timePicker, int i, int i1) {
@@ -64,12 +71,20 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
+        /* Getting firebase instances because we will save the events to firebase */
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
+
+        /* Intent to go back to Reminder Activity */
         Intent toReminderActivity = new Intent(this,ReminderActivity.class);
+
+        /* Database reference to "Events" because that is the place where the events will be saved */
         mDBRef = mDatabase.getReference("Events");
 
-
+        /* addEvent button creates a single event object by taking the entered information from the
+        *  user and adds that to "Events" under the user's id. Finally redirects user to Reminder
+        *  Activity
+        */
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +99,7 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
+        /* Cancel button cancels the process and sends the user to Reminder Activity */
         cancelEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,19 +110,3 @@ public class AddEventActivity extends AppCompatActivity {
 
 
 }
-/*
-*
-*
-*  String dateC = "19/05/2022";
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date1 = LocalDate.parse(dateC, formatter1);
-
-        LocalTime dateT = LocalTime.of(17, 40);
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-        formatter2.format(dateT);
-
-        Log.d("converting 1",date1.toString());
-        Log.d("converting 2",formatter2.format(dateT));
-*
-*
-* */
