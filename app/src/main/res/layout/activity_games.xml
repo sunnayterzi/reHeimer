@@ -58,7 +58,7 @@
             <ImageView
                 android:id="@+id/imageView_verbalMemory"
                 android:layout_width="240dp"
-                android:layout_height="240dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

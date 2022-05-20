@@ -39,7 +39,7 @@ import java.io.ByteArrayOutputStream;
 
 public class UploadPhotoActivity extends AppCompatActivity {
 
-    private Button uploadbtn;
+    private Button uploadbtn,cancelBut;
     private ImageView photo;
     private ProgressBar progressBar;
     private EditText description;
@@ -51,12 +51,14 @@ public class UploadPhotoActivity extends AppCompatActivity {
     private Uri imageUri;
     String currentDesc, currentPhoto;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_photo);
 
         uploadbtn=(Button) findViewById(R.id.button_UploadImage);
+        cancelBut = (Button)findViewById(R.id.button_cancelphoto);
         photo=(ImageView) findViewById(R.id.imageAddPhoto);
         progressBar=(ProgressBar) findViewById(R.id.progressBar_uploadImage);
         progressBar.setVisibility(View.INVISIBLE);
@@ -242,5 +244,10 @@ public class UploadPhotoActivity extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(mUri));
+    }
+
+    public void cancelOpr(View view) {
+        Intent cancel = new Intent(this,PhotosActivity.class);
+        startActivity(cancel);
     }
 }

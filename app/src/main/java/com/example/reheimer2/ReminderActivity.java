@@ -126,7 +126,7 @@ public class ReminderActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_profile:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }

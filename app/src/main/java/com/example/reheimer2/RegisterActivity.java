@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             configPasswordRegister.requestFocus();
             return;
         }
-        Intent mainIntent1 = new Intent(this, MainActivity.class);
+        Intent mainIntent1 = new Intent(this, ProfileActivity.class);
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

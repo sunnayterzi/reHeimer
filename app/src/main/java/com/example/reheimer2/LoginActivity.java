@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // to prevent the user from constantly logging in unless logged out
         if(mAuth.getCurrentUser()!=null){
-            Intent mainIntent=new Intent(this,MainActivity.class);
+            Intent mainIntent=new Intent(this,ProfileActivity.class);
             startActivity(mainIntent);
         }
     }
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loginPassword.requestFocus();
             return;
         }
-        Intent mainIntent = new Intent(this, MainActivity.class);
+        Intent mainIntent = new Intent(this, ProfileActivity.class);
 
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

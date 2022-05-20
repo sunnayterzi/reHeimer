@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Reheimer2">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".VerbalMemoryActivity"
             android:exported="false" />
         <!--

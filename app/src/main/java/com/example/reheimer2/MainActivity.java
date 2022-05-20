@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +23,7 @@ import java.security.KeyStore;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button logout, update;
+    private Button update,cancel;
     DatabaseReference reference;
     private FirebaseAuth mAuth;
     private DatabaseReference mReference;
@@ -40,53 +41,12 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
-        // navigate user to activities
-        bottomNavigationView=findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.nav_profile);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-
-                    case R.id.nav_photos:
-                        startActivity(new Intent(getApplicationContext(),PhotosActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.nav_reminder:
-                        startActivity(new Intent(getApplicationContext(),ReminderActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.nav_location:
-                        startActivity(new Intent(getApplicationContext(),MapsActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.nav_game:
-                        startActivity(new Intent(getApplicationContext(),GamesActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.nav_profile:
-                        return true;
-                }
-                return false;
-            }
-        });
-
 
         update=(Button) findViewById(R.id.ProfileUpdate_button);
-        logout=(Button) findViewById(R.id.button_logout);
+        cancel=(Button) findViewById(R.id.button_cancelUpdate);
 
-        // logout click listener
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            }
-        });
+
+
     }
     // get user information
     @Override
@@ -128,5 +88,16 @@ public class MainActivity extends AppCompatActivity {
         user.surname = surnameEdit.getText().toString();
         reference.child(mAuth.getCurrentUser().getUid()).child("name").setValue(nameEdit.getText().toString());
         user.name = nameEdit.getText().toString();
+
+        Intent updt = new Intent(this, ProfileActivity.class);
+        startActivity(updt);
+        Toast.makeText(this, "Profile information updated successfully", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void cancelUpdate(View view) {
+        Intent updt = new Intent(this, ProfileActivity.class);
+        startActivity(updt);
+
     }
 }

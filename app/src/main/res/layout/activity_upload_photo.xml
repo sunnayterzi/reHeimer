@@ -61,4 +61,17 @@
         app:layout_constraintStart_toStartOf="@+id/editText_descriptionPhoto"
         app:layout_constraintTop_toBottomOf="@+id/editText_descriptionPhoto" />
 
+    <Button
+        android:id="@+id/button_cancelphoto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_bg"
+        android:onClick="cancelOpr"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="@+id/button_UploadImage"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/button_UploadImage"
+        app:layout_constraintTop_toBottomOf="@+id/button_UploadImage" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
