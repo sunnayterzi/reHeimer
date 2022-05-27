@@ -5,16 +5,34 @@ public class SingleEvent {
     * Takes date, context and hour of the event
     * and creates an object. */
 
-    String date, eventContext,hour;
+    String date, eventContext,hour,key;
+    double id;
 
     public SingleEvent(){
 
     }
 
-    public SingleEvent(String date, String eventContext, String hour){
+    public SingleEvent(double id, String date, String eventContext, String hour){
+        this.id = id;
         this.date=date;
         this.eventContext = eventContext;
         this.hour=hour;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public double getId() {
+        return id;
+    }
+
+    public void setId(double id) {
+        this.id = id;
     }
 
     public String getDate() {

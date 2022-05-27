@@ -21,29 +21,51 @@
             android:id="@+id/eventContext"
             android:layout_width="114dp"
             android:layout_height="18dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginBottom="5dp"
             android:paddingStart="15dp"
             android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/eventDate"
-            app:layout_constraintHorizontal_bias="0.32"
+            app:layout_constraintHorizontal_bias="0.061"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/eventTime"
-            android:layout_width="114dp"
+            android:layout_width="80dp"
             android:layout_height="18dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/eventDate"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/eventDate"
-            android:layout_width="114dp"
+            android:layout_width="100dp"
             android:layout_height="18dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="8dp"
             android:text="TextView"
-            app:layout_constraintEnd_toStartOf="@+id/eventTime"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/eventContext"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/deleteEventBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="2dp"
+            android:text="X"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/eventTime"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

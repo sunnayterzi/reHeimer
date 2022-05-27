@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,11 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 
-public class ReminderActivity extends AppCompatActivity {
+public class ReminderActivity extends AppCompatActivity implements EventAdapter.OnItemClickListener {
     /*
     * This activity shows current events that user has entered.*/
 
@@ -34,6 +37,7 @@ public class ReminderActivity extends AppCompatActivity {
     private DatabaseReference mDBRef;
     BottomNavigationView bottomNavigationView;
     private CalendarView calendarView;
+    private ArrayList<SingleEvent> eventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +56,14 @@ public class ReminderActivity extends AppCompatActivity {
         });
 
         /* Events to show on the screen will be hold in this list.*/
-        ArrayList<SingleEvent> eventList = new ArrayList<>();
+        eventList = new ArrayList<>();
 
         /* List above will be put in a Recycler View */
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler1);
 
         /* Adapter works as a bridge between eventList and recycler view */
-        EventAdapter eventAdapter = new EventAdapter(eventList);
+        EventAdapter eventAdapter = new EventAdapter(this, eventList);
+        eventAdapter.setOnItemClickListener(ReminderActivity.this);
 
 
 
@@ -77,6 +82,7 @@ public class ReminderActivity extends AppCompatActivity {
                     * singleEvent object is added to eventList array list.
                     * */
                     SingleEvent sEvent = dataSnapshot.getValue(SingleEvent.class);
+                    sEvent.setKey(dataSnapshot.getKey());
                     eventList.add(sEvent);
                 }
                 eventAdapter.notifyDataSetChanged();
@@ -96,6 +102,9 @@ public class ReminderActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         /* After fetching the data final view is set. */
         recyclerView.setAdapter(eventAdapter);
+
+
+
 
         /*      Bottom Navigation Bar         */
 
@@ -133,5 +142,38 @@ public class ReminderActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public void onWhatEverClick(int position) {
+
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        //mDBRef.orderbyKey
+
+        SingleEvent selectedItem = eventList.get(position);
+        String selectedKey = selectedItem.getKey();
+
+        mDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mDBRef.child(selectedKey).removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 }

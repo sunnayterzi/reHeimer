@@ -89,7 +89,8 @@ public class AddEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
-                SingleEvent singleEvent = new SingleEvent(selectedDate,eventContext.getText().toString(),selectedTime);
+                double eventId = Math.random() * 1000;
+                SingleEvent singleEvent = new SingleEvent(eventId,selectedDate,eventContext.getText().toString(),selectedTime);
 
                 String id = mDBRef.push().getKey();
 
