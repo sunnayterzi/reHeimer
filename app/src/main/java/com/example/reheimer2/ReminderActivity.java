@@ -38,6 +38,7 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
     BottomNavigationView bottomNavigationView;
     private CalendarView calendarView;
     private ArrayList<SingleEvent> eventList;
+    private EventAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler1);
 
         /* Adapter works as a bridge between eventList and recycler view */
-        EventAdapter eventAdapter = new EventAdapter(this, eventList);
+        eventAdapter = new EventAdapter(this, eventList);
         eventAdapter.setOnItemClickListener(ReminderActivity.this);
 
 
@@ -157,7 +158,6 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
 
     @Override
     public void onDeleteClick(int position) {
-        //mDBRef.orderbyKey
 
         SingleEvent selectedItem = eventList.get(position);
         String selectedKey = selectedItem.getKey();
@@ -166,6 +166,8 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mDBRef.child(selectedKey).removeValue();
+                eventAdapter.notifyDataSetChanged();
+
             }
 
             @Override
