@@ -39,6 +39,7 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
     private CalendarView calendarView;
     private ArrayList<SingleEvent> eventList;
     private EventAdapter eventAdapter;
+    private ValueEventListener mDBListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +74,10 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mDBRef = mDatabase.getReference("Events/" + mAuth.getCurrentUser().getUid());
-        mDBRef.addValueEventListener(new ValueEventListener() {
+        mDBListener=mDBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                eventList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     /*
                     * Every event has a date, hour and name. Data taken from the database
@@ -150,11 +152,14 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
     public void onItemClick(int position) {
 
     }
+    /*
 
     @Override
     public void onWhatEverClick(int position) {
 
     }
+
+     */
 
     @Override
     public void onDeleteClick(int position) {
@@ -177,5 +182,10 @@ public class ReminderActivity extends AppCompatActivity implements EventAdapter.
         });
 
 
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDBRef.removeEventListener(mDBListener);
     }
 }

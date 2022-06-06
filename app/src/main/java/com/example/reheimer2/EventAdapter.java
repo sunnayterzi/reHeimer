@@ -86,10 +86,10 @@ public class EventAdapter extends RecyclerView.Adapter <EventAdapter.EventViewHo
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
             contextMenu.setHeaderTitle("Select Option");
-            MenuItem doWhatever = contextMenu.add(contextMenu.NONE, 1, 1,"Update");
-            MenuItem delete = contextMenu.add(contextMenu.NONE,2,2,"Delete");
+            //MenuItem doWhatever = contextMenu.add(contextMenu.NONE, 1, 1,"Update");
+            MenuItem delete = contextMenu.add(contextMenu.NONE,1,1,"Delete");
 
-            doWhatever.setOnMenuItemClickListener(this);
+            //doWhatever.setOnMenuItemClickListener(this);
             delete.setOnMenuItemClickListener(this);
         }
 
@@ -99,10 +99,10 @@ public class EventAdapter extends RecyclerView.Adapter <EventAdapter.EventViewHo
                 int position = getAdapterPosition();
                 if(position != RecyclerView.NO_POSITION){
                     switch (menuItem.getItemId()){
-                        case 1:
+                        /*case 1:
                             mListener.onWhatEverClick(position);
-                            return true;
-                        case 2:
+                            return true;*/
+                        case 1:
                             mListener.onDeleteClick(position);
                             return true;
 
@@ -114,7 +114,7 @@ public class EventAdapter extends RecyclerView.Adapter <EventAdapter.EventViewHo
     }
     public interface OnItemClickListener {
         void onItemClick(int position);
-        void onWhatEverClick(int position);
+        //void onWhatEverClick(int position);
         void onDeleteClick(int position);
     }
     public void setOnItemClickListener(OnItemClickListener listener){
